@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+
+{% block title %}DBSCAN Clustering{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="mb-0"><i class="fas fa-dot-circle me-2"></i>DBSCAN Clustering</h2>
+            </div>
+            <div class="card-body">
+                <p class="lead">Density-based clustering that finds arbitrary-shaped clusters and identifies noise points.</p>
+                
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="control-panel">
+                            <h5>Parameters</h5>
+                            
+                            <div class="parameter-control">
+                                <label for="dbscan-epsilon" class="form-label">
+                                    Epsilon (ε) - Neighborhood radius: <span id="dbscan-epsilon-value" class="badge bg-primary">0.5</span>
+                                </label>
+                                <input type="range" class="form-range" id="dbscan-epsilon" min="0.1" max="2.0" step="0.1" value="0.5">
+                            </div>
+
+                            <div class="parameter-control">
+                                <label for="dbscan-minpts" class="form-label">
+                                    Min Points - Minimum neighbors to form cluster
+                                </label>
+                                <input type="number" class="form-control" id="dbscan-minpts" min="1" max="20" value="5">
+                            </div>
+
+                            <div class="parameter-control">
+                                <label for="dbscan-dataset" class="form-label">Dataset</label>
+                                <select class="form-select" id="dbscan-dataset">
+                                    <option value="synthetic">Synthetic Data</option>
+                                    <option value="moons">Moons Dataset</option>
+                                    <option value="blobs">Synthetic Blobs</option>
+                                    <option value="iris">Iris Dataset</option>
+                                    <option value="custom">Upload Custom CSV</option>
+                                </select>
+                            </div>
+
+                            <div class="parameter-control" id="dbscan-custom-upload" style="display: none;">
+                                <label for="dbscan-file" class="form-label">Upload CSV File</label>
+                                <div class="upload-area" id="dbscan-upload-area">
+                                    <i class="fas fa-cloud-upload-alt fa-2x mb-2"></i>
+                                    <p class="mb-1">Click to upload or drag and drop</p>
+                                    <small class="text-muted">CSV files only</small>
+                                    <input type="file" id="dbscan-file" accept=".csv" style="display: none;">
+                                </div>
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button id="dbscan-generate" class="btn btn-outline-primary">
+                                    <i class="fas fa-sync me-2"></i>Generate New Data
+                                </button>
+                                <button id="dbscan-run" class="btn btn-success">
+                                    <i class="fas fa-play me-2"></i>Run DBSCAN
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="results-panel mt-4">
+                            <h5>Results</h5>
+                            <div class="table-responsive">
+                                <table class="table table-sm table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Clusters Found</th>
+                                            <th>Noise Points</th>
+                                            <th>Total Points</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td id="dbscan-clusters">3</td>
+                                            <td id="dbscan-noise">6</td>
+                                            <td id="dbscan-total">85</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="mt-3">
+                                <h6>Cluster Summary</h6>
+                                <div id="dbscan-summary">
+                                    <!-- Will be populated by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-8">
+                        <div class="chart-container">
+                            <canvas id="dbscan-chart"></canvas>
+                        </div>
+                        
+                        <div class="row mt-4">
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header bg-info text-white">
+                                        <h6 class="mb-0">Algorithm Information</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <p><strong>DBSCAN Steps:</strong></p>
+                                        <ol class="small">
+                                            <li>Find core points (minPts in ε-radius)</li>
+                                            <li>Expand clusters from core points</li>
+                                            <li>Connect density-reachable points</li>
+                                            <li>Mark remaining as noise</li>
+                                        </ol>
+                                        <p class="mb-1"><strong>Best for:</strong> Arbitrary shapes, noise detection</p>
+                                        <p class="mb-0"><strong>Limitations:</strong> Parameter sensitivity, varying densities</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header bg-info text-white">
+                                        <h6 class="mb-0">Parameter Guidance</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="small mb-1"><strong>ε too small:</strong> Many small clusters, more noise</p>
+                                        <p class="small mb-1"><strong>ε too large:</strong> Few large clusters, less noise</p>
+                                        <p class="small mb-1"><strong>minPts too small:</strong> Noise as clusters</p>
+                                        <p class="small mb-0"><strong>minPts too large:</strong> Core points missed</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="loading" id="dbscan-loading">
+    <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+    <p class="mt-2">Running DBSCAN algorithm...</p>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/dbscan.js') }}"></script>
+{% endblock %}

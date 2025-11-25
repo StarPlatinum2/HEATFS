@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+
+{% block title %}Principal Component Analysis{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="mb-0"><i class="fas fa-chart-line me-2"></i>Principal Component Analysis (PCA)</h2>
+            </div>
+            <div class="card-body">
+                <p class="lead">Reduce data dimensions while preserving maximum variance. Transform 3D data to 2D or 1D.</p>
+                
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="control-panel">
+                            <h5>Parameters</h5>
+
+                            <div class="parameter-control">
+                                <label for="pca-components" class="form-label">
+                                    Number of Components: <span id="pca-components-value" class="badge bg-primary">2</span>
+                                </label>
+                                <input type="range" class="form-range" id="pca-components" min="1" max="3" value="2">
+                            </div>
+
+                            <div class="parameter-control">
+                                <label for="pca-dataset" class="form-label">Dataset</label>
+                                <select class="form-select" id="pca-dataset">
+                                    <option value="synthetic">Synthetic 3D Data</option>
+                                    <option value="iris">Iris Dataset</option>
+                                    <option value="wine">Wine Dataset</option>
+                                    <option value="custom">Upload Custom CSV</option>
+                                </select>
+                            </div>
+
+                            <div class="parameter-control" id="pca-custom-upload" style="display: none;">
+                                <label for="pca-file" class="form-label">Upload CSV File</label>
+                                <div class="upload-area" id="pca-upload-area">
+                                    <i class="fas fa-cloud-upload-alt fa-2x mb-2"></i>
+                                    <p class="mb-1">Click to upload or drag and drop</p>
+                                    <small class="text-muted">CSV files only</small>
+                                    <input type="file" id="pca-file" accept=".csv" style="display: none;">
+                                </div>
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button id="pca-generate" class="btn btn-outline-primary">
+                                    <i class="fas fa-sync me-2"></i>Generate New Data
+                                </button>
+                                <button id="pca-run" class="btn btn-success">
+                                    <i class="fas fa-play me-2"></i>Run PCA
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="results-panel mt-4">
+                            <h5>Results</h5>
+                            
+                            <div class="mb-3">
+                                <span class="metric">Variance Explained: <span id="pca-variance">97.98%</span></span>
+                                <span class="badge bg-success ms-2">Excellent</span>
+                            </div>
+
+                            <div class="mb-3">
+                                <h6>Principal Component Directions</h6>
+                                <p class="mb-1"><strong>PC1 Direction Vector:</strong></p>
+                                <p id="pca-vector" class="small">X: 0.675, Y: 0.551, Z: 0.491</p>
+                                <p class="mb-0"><strong>Dimensions:</strong> <span id="pca-dimensions">3D → 2D</span></p>
+                            </div>
+
+                            <div class="mb-3">
+                                <h6>Explained Variance Ratio</h6>
+                                <div id="pca-variance-bars">
+                                    <!-- Will be populated by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-8">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="chart-container">
+                                    <canvas id="pca-original-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <div class="chart-container">
+                                    <canvas id="pca-transformed-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header bg-info text-white">
+                                        <h6 class="mb-0">PCA Information</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <p><strong>PCA Steps:</strong></p>
+                                        <ol class="small">
+                                            <li>Standardize the data</li>
+                                            <li>Compute covariance matrix</li>
+                                            <li>Calculate eigenvectors/values</li>
+                                            <li>Sort by explained variance</li>
+                                            <li>Project to new dimensions</li>
+                                        </ol>
+                                        <p class="mb-1"><strong>Best for:</strong> Noise reduction, visualization</p>
+                                        <p class="mb-0"><strong>Limitations:</strong> Linear assumptions, scale sensitivity</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header bg-info text-white">
+                                        <h6 class="mb-0">Interpretation</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="small mb-1"><strong>Variance &gt; 95%:</strong> Excellent dimensionality reduction</p>
+                                        <p class="small mb-1"><strong>Variance 80-95%:</strong> Good preservation</p>
+                                        <p class="small mb-1"><strong>Variance &lt; 80%:</strong> Significant information loss</p>
+                                        <p class="small mb-0"><strong>PC Directions:</strong> Show feature importance</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="loading" id="pca-loading">
+    <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+    <p class="mt-2">Running PCA analysis...</p>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/pca.js') }}"></script>
+{% endblock %}

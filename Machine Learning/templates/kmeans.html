@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+
+{% block title %}K-Means Clustering{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="mb-0"><i class="fas fa-cluster me-2"></i>K-Means Clustering</h2>
+            </div>
+            <div class="card-body">
+                <p class="lead">Group similar data points together by iteratively assigning points to nearest centroids.</p>
+                
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="control-panel">
+                            <h5>Parameters</h5>
+                            
+                            <div class="parameter-control">
+                                <label for="kmeans-clusters" class="form-label">
+                                    Number of Clusters (k): <span id="kmeans-clusters-value" class="badge bg-primary">4</span>
+                                </label>
+                                <input type="range" class="form-range" id="kmeans-clusters" min="2" max="10" value="4">
+                            </div>
+
+                            <div class="parameter-control">
+                                <label for="kmeans-dataset" class="form-label">Dataset</label>
+                                <select class="form-select" id="kmeans-dataset">
+                                    <option value="synthetic">Synthetic Data</option>
+                                    <option value="iris">Iris Dataset</option>
+                                    <option value="wine">Wine Dataset</option>
+                                    <option value="blobs">Synthetic Blobs</option>
+                                    <option value="custom">Upload Custom CSV</option>
+                                </select>
+                            </div>
+
+                            <div class="parameter-control" id="kmeans-custom-upload" style="display: none;">
+                                <label for="kmeans-file" class="form-label">Upload CSV File</label>
+                                <div class="upload-area" id="kmeans-upload-area">
+                                    <i class="fas fa-cloud-upload-alt fa-2x mb-2"></i>
+                                    <p class="mb-1">Click to upload or drag and drop</p>
+                                    <small class="text-muted">CSV files only</small>
+                                    <input type="file" id="kmeans-file" accept=".csv" style="display: none;">
+                                </div>
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button id="kmeans-generate" class="btn btn-outline-primary">
+                                    <i class="fas fa-sync me-2"></i>Generate New Data
+                                </button>
+                                <button id="kmeans-run" class="btn btn-success">
+                                    <i class="fas fa-play me-2"></i>Run K-Means
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="results-panel mt-4">
+                            <h5>Results</h5>
+                            <div class="table-responsive">
+                                <table class="table table-sm table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Iteration</th>
+                                            <th>Clusters</th>
+                                            <th>Inertia (Lower = Better)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="kmeans-results">
+                                        <tr>
+                                            <td>8</td>
+                                            <td>4</td>
+                                            <td>7770</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="mt-3">
+                                <h6>Cluster Centers</h6>
+                                <div id="kmeans-centers">
+                                    <!-- Will be populated by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-8">
+                        <div class="chart-container">
+                            <canvas id="kmeans-chart"></canvas>
+                        </div>
+                        
+                        <div class="row mt-4">
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header bg-info text-white">
+                                        <h6 class="mb-0">Algorithm Information</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <p><strong>K-Means Steps:</strong></p>
+                                        <ol class="small">
+                                            <li>Initialize k centroids randomly</li>
+                                            <li>Assign points to nearest centroid</li>
+                                            <li>Recalculate centroid positions</li>
+                                            <li>Repeat until convergence</li>
+                                        </ol>
+                                        <p class="mb-1"><strong>Best for:</strong> Spherical clusters, similar sizes</p>
+                                        <p class="mb-0"><strong>Limitations:</strong> Requires k, sensitive to outliers</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header bg-info text-white">
+                                        <h6 class="mb-0">Performance Metrics</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="kmeans-metrics">
+                                            <p class="mb-1">Inertia: <span class="badge bg-primary" id="inertia-value">7770</span></p>
+                                            <p class="mb-1">Silhouette Score: <span class="badge bg-success" id="silhouette-value">-</span></p>
+                                            <p class="mb-0">Iterations: <span class="badge bg-warning" id="iterations-value">-</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="loading" id="kmeans-loading">
+    <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+    <p class="mt-2">Running K-Means algorithm...</p>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/kmeans.js') }}"></script>
+{% endblock %}

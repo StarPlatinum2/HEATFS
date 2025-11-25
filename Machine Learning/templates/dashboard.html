@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Unsupervised Learning{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="mb-0"><i class="fas fa-brain me-2"></i>Unsupervised Learning</h2>
+            </div>
+            <div class="card-body">
+                <p class="lead">Discover hidden patterns and structures in data</p>
+                
+                <div class="row mt-4">
+                    <div class="col-md-8">
+                        <h4>What is Unsupervised Learning?</h4>
+                        <p>It's a machine learning approach where models find patterns in data without labeled outputs. The algorithm explores the data structure to discover hidden relationships, groupings, or reduce dimensions. This is like learning by observation without a teacher, finding natural patterns on your own.</p>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <h5>Available Algorithms</h5>
+                                <ul class="list-unstyled">
+                                    <li><i class="fas fa-cluster me-2 text-primary"></i>K-Means Clustering</li>
+                                    <li><i class="fas fa-chart-line me-2 text-success"></i>PCA</li>
+                                    <li><i class="fas fa-dot-circle me-2 text-warning"></i>DBSCAN</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-5">
+                    <div class="col-md-4 mb-4">
+                        <div class="card algorithm-card h-100">
+                            <div class="card-header bg-primary text-white">
+                                <h5 class="mb-0"><i class="fas fa-cluster me-2"></i>K-Means Clustering</h5>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">Group similar data points together by iteratively assigning points to nearest centroids.</p>
+                                <ul class="list-unstyled">
+                                    <li><small><i class="fas fa-check text-success me-2"></i>Centroid-based clustering</small></li>
+                                    <li><small><i class="fas fa-check text-success me-2"></i>Requires number of clusters (k)</small></li>
+                                    <li><small><i class="fas fa-check text-success me-2"></i>Fast and scalable</small></li>
+                                </ul>
+                            </div>
+                            <div class="card-footer">
+                                <a href="{{ url_for('kmeans_page') }}" class="btn btn-primary w-100">Explore K-Means</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4 mb-4">
+                        <div class="card algorithm-card h-100">
+                            <div class="card-header bg-success text-white">
+                                <h5 class="mb-0"><i class="fas fa-chart-line me-2"></i>Principal Component Analysis</h5>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">Reduce data dimensions while preserving maximum variance. Transform 3D data to 2D or 1D.</p>
+                                <ul class="list-unstyled">
+                                    <li><small><i class="fas fa-check text-success me-2"></i>Dimensionality reduction</small></li>
+                                    <li><small><i class="fas fa-check text-success me-2"></i>Feature extraction</small></li>
+                                    <li><small><i class="fas fa-check text-success me-2"></i>Visualization aid</small></li>
+                                </ul>
+                            </div>
+                            <div class="card-footer">
+                                <a href="{{ url_for('pca_page') }}" class="btn btn-success w-100">Explore PCA</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4 mb-4">
+                        <div class="card algorithm-card h-100">
+                            <div class="card-header bg-warning text-dark">
+                                <h5 class="mb-0"><i class="fas fa-dot-circle me-2"></i>DBSCAN Clustering</h5>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">Density-based clustering that finds arbitrary-shaped clusters and identifies noise points.</p>
+                                <ul class="list-unstyled">
+                                    <li><small><i class="fas fa-check text-success me-2"></i>Arbitrary cluster shapes</small></li>
+                                    <li><small><i class="fas fa-check text-success me-2"></i>Noise detection</small></li>
+                                    <li><small><i class="fas fa-check text-success me-2"></i>No need for cluster count</small></li>
+                                </ul>
+                            </div>
+                            <div class="card-footer">
+                                <a href="{{ url_for('dbscan_page') }}" class="btn btn-warning w-100">Explore DBSCAN</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="mb-0">Getting Started</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h6>Quick Start Guide:</h6>
+                                        <ol>
+                                            <li>Choose an algorithm from the navigation</li>
+                                            <li>Generate synthetic data or load a dataset</li>
+                                            <li>Adjust parameters using the controls</li>
+                                            <li>Run the algorithm and view results</li>
+                                            <li>Explore different visualizations</li>
+                                        </ol>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h6>Supported Datasets:</h6>
+                                        <ul>
+                                            <li>Synthetic data (generated on-demand)</li>
+                                            <li>Iris dataset (classification)</li>
+                                            <li>Wine dataset (multi-class)</li>
+                                            <li>Custom CSV uploads</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
