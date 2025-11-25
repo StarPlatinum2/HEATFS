@@ -1,0 +1,177 @@
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --accent-color: #e74c3c;
+    --success-color: #27ae60;
+    --warning-color: #f39c12;
+    --light-color: #ecf0f1;
+    --dark-color: #34495e;
+}
+
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.card-header {
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 10px 10px 0 0 !important;
+    padding: 15px 20px;
+}
+
+.btn-primary {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+.btn-primary:hover {
+    background-color: #2980b9;
+    border-color: #2980b9;
+}
+
+.algorithm-card {
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.algorithm-card:hover {
+    transform: translateY(-5px);
+}
+
+.control-panel {
+    background-color: var(--light-color);
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.results-panel {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.metric-card {
+    text-align: center;
+    padding: 15px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.metric-value {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.cluster-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    color: white;
+    font-weight: bold;
+    margin: 2px;
+}
+
+.noise-point {
+    background-color: #95a5a6 !important;
+}
+
+.chart-container {
+    position: relative;
+    height: 400px;
+    width: 100%;
+}
+
+.loading {
+    display: none;
+    text-align: center;
+    padding: 20px;
+}
+
+.loading-spinner {
+    width: 3rem;
+    height: 3rem;
+}
+
+.parameter-control {
+    margin-bottom: 15px;
+}
+
+.parameter-control label {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.dataset-selector {
+    margin-bottom: 20px;
+}
+
+.upload-area {
+    border: 2px dashed #dee2e6;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+.upload-area:hover {
+    border-color: var(--secondary-color);
+}
+
+.upload-area.dragover {
+    border-color: var(--success-color);
+    background-color: rgba(39, 174, 96, 0.1);
+}
+
+.nav-tabs .nav-link.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.iteration-history {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.cluster-center {
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    background-color: var(--light-color);
+}
+
+.explained-variance {
+    height: 20px;
+    background-color: #e9ecef;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 5px 0;
+}
+
+.variance-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--secondary-color), var(--success-color));
+    transition: width 0.5s ease;
+}
+
+@media (max-width: 768px) {
+    .chart-container {
+        height: 300px;
+    }
+    
+    .metric-value {
+        font-size: 1.5rem;
+    }
+}
