@@ -42,5 +42,6 @@ A comprehensive web-based dashboard for exploring and visualizing unsupervised m
 
 1. **Clone or download the project:**
 ```bash
-git clone <https://github.com/StarPlatinum2/HEATFS/tree/mainl>
+git clone <https://github.com/StarPlatinum2/HEATFS.git>
+
 cd unsupervised-learning-dashboard
