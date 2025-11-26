@@ -26,6 +26,7 @@ Open http://localhost:5000 → paste code → enjoy sub-second reviews.
 Folder map:
 
 ai-code-review/
+
 ├── static/          # CSS, JS, images
 ├── templates/       # HTML (base + pages)
 ├── data/            # JSON storage (no DB)
