@@ -3,7 +3,7 @@ import json, re, subprocess, sys, ast
 from typing import Dict, List
 from groq import Groq
 
-CLIENT = Groq(api_key="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")  # <-- paste key here
+CLIENT = Groq(api_key="gsk_YOUR_REAL_KEY_HERE")  # <-- paste key here
 MODEL  = "llama-3.1-8b-instant"                # 32 k ctx, sub-second
 
 # ---------- 1. ultra-fast linter ----------
