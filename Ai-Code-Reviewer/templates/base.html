@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}AI Code Review{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <nav class="sidebar">
+            <div class="logo">
+                <i class="fas fa-robot"></i>
+                <span>AI Code Review</span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item {% if request.endpoint == 'dashboard' %}active{% endif %}">
+                    <a href="{{ url_for('dashboard') }}">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item {% if request.endpoint == 'code_review' %}active{% endif %}">
+                    <a href="{{ url_for('code_review') }}">
+                        <i class="fas fa-code"></i>
+                        <span>Code Review</span>
+                    </a>
+                </li>
+                <li class="nav-item {% if request.endpoint == 'style_guides' %}active{% endif %}">
+                    <a href="{{ url_for('style_guides') }}">
+                        <i class="fas fa-book"></i>
+                        <span>Style Guides</span>
+                    </a>
+                </li>
+                <li class="nav-item {% if request.endpoint == 'training_data' %}active{% endif %}">
+                    <a href="{{ url_for('training_data') }}">
+                        <i class="fas fa-database"></i>
+                        <span>Training Data</span>
+                    </a>
+                </li>
+                <li class="nav-item {% if request.endpoint == 'settings' %}active{% endif %}">
+                    <a href="{{ url_for('settings') }}">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="nav-footer">
+                <a href="#" class="sign-out">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Sign Out</span>
+                </a>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
