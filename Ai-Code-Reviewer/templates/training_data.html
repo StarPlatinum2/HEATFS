@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Training Data{% endblock %}
+{% block content %}
+    <h3>Training Data</h3>
+    <p style="color: #64748b; margin-bottom: 20px;">Import past pull requests to train the AI</p>
+
+    <div class="empty-state">
+        <i class="fas fa-database empty-icon"></i>
+        <h3>No training data yet</h3>
+        <p style="color: #64748b; margin-bottom: 20px;">Import past pull requests to help the AI learn your team's review patterns</p>
+        <button class="btn-primary">+ Import First PR</button>
+    </div>
+{% endblock %}

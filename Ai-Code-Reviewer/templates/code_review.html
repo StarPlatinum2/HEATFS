@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Code Review - AI Code Review{% endblock %}
+
+{% block content %}
+<div class="code-review-header">
+    <h1>Code Review</h1>
+    <p>Analyze your code with AI</p>
+</div>
+
+<div class="code-review-container">
+    <div class="code-input-section">
+        <div class="input-header">
+            <h3>Your Code</h3>
+            <select id="languageSelect" class="language-select">
+                <option value="python">Python</option>
+                <option value="javascript">JavaScript</option>
+                <option value="java">Java</option>
+                <option value="cpp">C++</option>
+            </select>
+        </div>
+        <textarea id="codeInput" class="code-input" placeholder="Paste your code here..."></textarea>
+        <button id="reviewBtn" class="btn btn-primary btn-large">
+            <i class="fas fa-robot"></i>
+            Analyze Code
+        </button>
+    </div>
+
+    <div class="review-results-section" id="reviewResults" style="display: none;">
+        <div class="results-header">
+            <h3>AI Review Results</h3>
+            <div class="score-badge" id="scoreBadge">0.0</div>
+        </div>
+        
+        <div class="summary-card">
+            <h4>Summary</h4>
+            <p id="reviewSummary"></p>
+        </div>
+
+        <div class="issues-list">
+            <h4>Issues Found</h4>
+            <div id="issuesContainer"></div>
+        </div>
+
+        <div class="suggestions-list">
+            <h4>Suggestions</h4>
+            <div id="suggestionsContainer"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}

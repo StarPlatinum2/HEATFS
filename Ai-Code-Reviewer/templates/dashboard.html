@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - AI Code Review{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1>Dashboard</h1>
+    <p>Overview of your code reviews</p>
+</div>
+
+<div class="stats-grid">
+    <div class="stat-card">
+        <div class="stat-icon">
+            <i class="fas fa-tasks"></i>
+        </div>
+        <div class="stat-info">
+            <h3 id="totalReviews">0</h3>
+            <p>Total Reviews</p>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon">
+            <i class="fas fa-clock"></i>
+        </div>
+        <div class="stat-info">
+            <h3 id="pendingReviews">0</h3>
+            <p>Pending</p>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <div class="stat-info">
+            <h3 id="completedReviews">0</h3>
+            <p>Completed</p>
+        </div>
+    </div>
+</div>
+
+<div class="recent-reviews">
+    <h2>Recent Reviews</h2>
+    <div class="reviews-list" id="recentReviews">
+        <div class="empty-state">
+            <i class="fas fa-code"></i>
+            <p>No reviews yet</p>
+            <a href="{{ url_for('code_review') }}" class="btn btn-primary">Start New Review</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
