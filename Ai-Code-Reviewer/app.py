@@ -6,7 +6,7 @@ from groq import Groq
 CLIENT = Groq(api_key="gsk_YOUR_REAL_KEY_HERE")  # <-- paste key here
 MODEL  = "llama-3.1-8b-instant"                # 32 k ctx, sub-second
 
-# ---------- 1. ultra-fast linter ----------
+# --------- 1. ultra-fast linter ---------
 def _lint(code: str) -> List[Dict]:
     issues = []
     try:
