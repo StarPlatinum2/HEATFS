@@ -169,7 +169,7 @@ function loadTrainingData() {
         });
 }
 
-// Initialize page-specific functions
+// Initialize page specific functions
 document.addEventListener('DOMContentLoaded', function() {
     const currentPath = window.location.pathname;
     
