@@ -73,7 +73,7 @@ def _lint(code: str, language: str) -> List[Dict]:
     return issues[:20]
 
 
-# ---------- 2. language-specific cloud prompt ----------
+# --------- 2. language-specific cloud prompt ---------
 def _ai_quick(code: str, language: str) -> Dict:
     prompt = (
         f"You are a senior {language} code reviewer.\n"
