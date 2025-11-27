@@ -6,7 +6,7 @@ from groq import Groq
 # -------------------- config --------------------
 CLIENT = Groq(api_key="gsk_YOUR_REAL_KEY_HERE")   # <-- your key
 MODEL  = "llama-3.1-8b-instant"                   # Groq fastest
-# ------------------------------------------------
+# ----------------------------------------------
 
 # ---------- 1. language-aware linters ----------
 def _lint(code: str, language: str) -> List[Dict]:
